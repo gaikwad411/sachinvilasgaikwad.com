@@ -1,12 +1,23 @@
+---
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#f6f5ef" />
+		<title>{title}</title>
 	</head>
 	<body>
 		<slot />
@@ -14,10 +25,36 @@
 </html>
 
 <style>
-	html,
-	body {
+	:global(*) {
+		box-sizing: border-box;
+	}
+
+	:global(:root) {
+		color-scheme: light;
+		--paper: #f6f5ef;
+		--forest: #263f34;
+		--sage: #78866a;
+		--body: #4e554c;
+		--muted: #818477;
+		--line: #deded3;
+		--serif: Georgia, 'Times New Roman', serif;
+		--sans: 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+		background: var(--paper);
+		font-family: var(--sans);
+	}
+
+	:global(html) {
+		min-width: 320px;
+		background: var(--paper);
+	}
+
+	:global(body) {
 		margin: 0;
 		width: 100%;
-		height: 100%;
+		min-height: 100vh;
+		color: var(--body);
+		font-family: var(--sans);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
 </style>
